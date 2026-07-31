@@ -1,0 +1,102 @@
+[
+  {
+    "id": 1,
+    "title": "Ch 1 – The Human Organism",
+    "file": "content/chapters/chapter-01.html"
+  },
+  {
+    "id": 2,
+    "title": "Ch 2 – The Chemical Basis of Life",
+    "file": "content/chapters/chapter-02.html"
+  },
+  {
+    "id": 3,
+    "title": "Ch 3 – Cell Structures and Their Functions",
+    "file": "content/chapters/chapter-03.html"
+  },
+  {
+    "id": 4,
+    "title": "Ch 4 – Tissues",
+    "file": "content/chapters/chapter-04.html"
+  },
+  {
+    "id": 5,
+    "title": "Ch 5 – Integumentary System",
+    "file": "content/chapters/chapter-05.html"
+  },
+  {
+    "id": 6,
+    "title": "Ch 6 – Skeletal System",
+    "file": "content/chapters/chapter-06.html"
+  },
+  {
+    "id": 7,
+    "title": "Ch 7 – Muscular System",
+    "file": "content/chapters/chapter-07.html"
+  },
+  {
+    "id": 8,
+    "title": "Ch 8 – Nervous System",
+    "file": "content/chapters/chapter-08.html"
+  },
+  {
+    "id": 9,
+    "title": "Ch 9 – Senses",
+    "file": "content/chapters/chapter-09.html"
+  },
+  {
+    "id": 10,
+    "title": "Ch 10 – Endocrine System",
+    "file": "content/chapters/chapter-10.html"
+  },
+  {
+    "id": 11,
+    "title": "Ch 11 – Blood",
+    "file": "content/chapters/chapter-11.html"
+  },
+  {
+    "id": 12,
+    "title": "Ch 12 – The Heart",
+    "file": "content/chapters/chapter-12.html"
+  },
+  {
+    "id": 13,
+    "title": "Ch 13 – Blood Vessels and Circulation",
+    "file": "content/chapters/chapter-13.html"
+  },
+  {
+    "id": 14,
+    "title": "Ch 14 – Lymphatic System & Immunity",
+    "file": "content/chapters/chapter-14.html"
+  },
+  {
+    "id": 15,
+    "title": "Ch 15 – Respiratory System",
+    "file": "content/chapters/chapter-15.html"
+  },
+  {
+    "id": 16,
+    "title": "Ch 16 – Digestive System",
+    "file": "content/chapters/chapter-16.html"
+  },
+  {
+    "id": 17,
+    "title": "Ch 17 – Nutrition, Metabolism, and Body Temperature",
+    "file": "content/chapters/chapter-17.html"
+  },
+  {
+    "id": 18,
+    "title": "Ch 18 – Urinary System and Fluid Balance",
+    "file": "content/chapters/chapter-18.html"
+  },
+  {
+    "id": 19,
+    "title": "Ch 19 – Reproductive System",
+    "file": "content/chapters/chapter-19.html"
+  },
+  {
+    "id": 20,
+    "title": "Ch 20 – Development, Heredity, and Aging",
+    "file": "content/chapters/chapter-20.html"
+  }
+]

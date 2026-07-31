@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RAZZ — All Chapters (Combined)</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Playfair+Display:wght@400;600;700&family=Caveat:wght@500;700&family=Nunito:wght@400;600;800&display=swap');
+
+  :root {
+    --sb-bg: #16212c;
+    --sb-bg2: #1b2733;
+    --sb-text: #cfd8dc;
+    --sb-text-strong: #ffffff;
+    --sb-accent: #E67E22;
+    --sb-active-bg: rgba(230,126,34,0.15);
+    --sb-border: rgba(255,255,255,0.08);
+    --sb-hover: rgba(255,255,255,0.06);
+    --body-bg: #1b2733;
+    --sb-font: 'Poppins', sans-serif;
+    --sb-radius: 0px;
+  }
+
+  * { box-sizing: border-box; margin:0; padding:0; font-family: var(--sb-font); }
+  html, body { height:100%; }
+  body { display:flex; background: var(--body-bg); transition: background 0.3s ease; }
+
+  /* ---------- THEMES ---------- */
+  html[data-theme="strawberry"] {
+    --sb-bg: #7a1f3d; --sb-bg2: #ffe4ec; --sb-text: #ffd7e2; --sb-text-strong: #fff;
+    --sb-accent: #ff4d6d; --sb-active-bg: rgba(255,77,109,0.25); --sb-border: rgba(255,255,255,0.15);
+    --sb-hover: rgba(255,255,255,0.1); --body-bg: #ffe4ec; --sb-font: 'Nunito', sans-serif;
+  }
+  html[data-theme="candyland"] {
+    --sb-bg: #4b1d6b; --sb-bg2: #ffccf2; --sb-text: #f3d9ff; --sb-text-strong: #fff;
+    --sb-accent: #ff2fd0; --sb-active-bg: rgba(255,47,208,0.25); --sb-border: rgba(255,255,255,0.18);
+    --sb-hover: rgba(255,255,255,0.12); --body-bg: linear-gradient(160deg,#ffd6f5,#c9b3ff);
+    --sb-font: 'Nunito', sans-serif;
+  }
+  html[data-theme="victorian"] {
+    --sb-bg: #2b1d14; --sb-bg2: #e9dcc3; --sb-text: #d9c9a8; --sb-text-strong: #fff4e0;
+    --sb-accent: #a8763e; --sb-active-bg: rgba(168,118,62,0.25); --sb-border: rgba(255,244,224,0.12);
+    --sb-hover: rgba(255,244,224,0.08); --body-bg: #e9dcc3; --sb-font: 'Playfair Display', serif;
+  }
+  html[data-theme="pencilrot"] {
+    --sb-bg: #3a3a38; --sb-bg2: #f4f1ea; --sb-text: #d6d3c9; --sb-text-strong: #fffdf7;
+    --sb-accent: #565654; --sb-active-bg: rgba(86,86,84,0.25); --sb-border: rgba(255,255,255,0.1);
+    --sb-hover: rgba(255,255,255,0.07); --body-bg: #f4f1ea; --sb-font: 'Caveat', cursive;
+  }
+  html[data-theme="sky"] {
+    --sb-bg: #1f4e8c; --sb-bg2: #eaf6ff; --sb-text: #dbeeff; --sb-text-strong: #ffffff;
+    --sb-accent: #3ea9ff; --sb-active-bg: rgba(62,169,255,0.25); --sb-border: rgba(255,255,255,0.15);
+    --sb-hover: rgba(255,255,255,0.1); --body-bg: linear-gradient(180deg,#bfe3ff,#eaf6ff);
+    --sb-font: 'Nunito', sans-serif;
+  }
+  html[data-theme="icepolar"] {
+    --sb-bg: #0e2f3d; --sb-bg2: #e4fbff; --sb-text: #cdf3ff; --sb-text-strong: #ffffff;
+    --sb-accent: #5fd8e6; --sb-active-bg: rgba(95,216,230,0.22); --sb-border: rgba(255,255,255,0.15);
+    --sb-hover: rgba(255,255,255,0.1); --body-bg: linear-gradient(180deg,#cdeff5,#e4fbff);
+    --sb-font: 'Nunito', sans-serif;
+  }
+  html[data-theme="appleos"] {
+    --sb-bg: rgba(246,246,248,0.85); --sb-bg2: #f6f6f8; --sb-text: #3c3c43; --sb-text-strong: #000;
+    --sb-accent: #007aff; --sb-active-bg: rgba(0,122,255,0.12); --sb-border: rgba(60,60,67,0.15);
+    --sb-hover: rgba(0,0,0,0.04); --body-bg: #f6f6f8; --sb-font: -apple-system,'SF Pro Display',Nunito,sans-serif;
+    --sb-radius: 10px;
+  }
+
+  #chapter-sidebar {
+    width: 300px;
+    min-width: 300px;
+    background: var(--sb-bg);
+    color: var(--sb-text);
+    height: 100vh;
+    overflow-y: auto;
+    padding: 0 0 20px 0;
+    box-shadow: 2px 0 10px rgba(0,0,0,0.3);
+    transition: margin-left 0.25s ease, background 0.3s ease, color 0.3s ease;
+  }
+  #chapter-sidebar.collapsed { margin-left: -300px; }
+
+  #sidebar-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 18px 12px 16px 20px;
+    border-bottom: 1px solid var(--sb-border);
+    margin-bottom: 10px;
+  }
+  #sidebar-header h1 {
+    font-size: 16px;
+    color: var(--sb-accent);
+    letter-spacing: 0.5px;
+  }
+  #close-sidebar-btn {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--sb-accent);
+    border: none;
+    color: #fff;
+    font-size: 14px;
+    font-weight: 700;
+    line-height: 1;
+    cursor: pointer;
+    padding: 10px 16px;
+    border-radius: 999px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.35);
+    transition: transform 0.15s ease, filter 0.2s ease;
+    white-space: nowrap;
+  }
+  #close-sidebar-btn .x-icon { font-size: 16px; line-height: 1; }
+  #close-sidebar-btn:hover { filter: brightness(1.1); transform: scale(1.04); }
+  #close-sidebar-btn:active { transform: scale(0.97); }
+
+  #open-sidebar-btn {
+    display: none;
+    position: fixed;
+    top: 16px;
+    left: 16px;
+    z-index: 500;
+    background: var(--sb-bg);
+    color: var(--sb-text-strong);
+    border: none;
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    font-size: 18px;
+    cursor: pointer;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.35);
+  }
+  #open-sidebar-btn.visible { display: block; }
+
+  /* ---------- First-open "chapters are here" popup ---------- */
+  #chapters-hint {
+    position: fixed;
+    top: 70px;
+    left: 16px;
+    z-index: 600;
+    max-width: 240px;
+    background: #fff;
+    color: #1b2733;
+    padding: 14px 16px;
+    border-radius: 14px;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.35);
+    font-family: 'Poppins', sans-serif;
+    font-size: 14px;
+    line-height: 1.4;
+    display: none;
+    animation: hint-pop 0.35s ease;
+  }
+  #chapters-hint.visible { display: block; }
+  #chapters-hint::before {
+    content: "";
+    position: absolute;
+    top: -9px;
+    left: 28px;
+    width: 16px;
+    height: 16px;
+    background: #fff;
+    transform: rotate(45deg);
+    box-shadow: -3px -3px 6px rgba(0,0,0,0.05);
+  }
+  #chapters-hint strong { display:block; margin-bottom: 4px; font-size: 15px; }
+  #chapters-hint-close {
+    position: absolute;
+    top: -10px;
+    right: -10px;
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    background: var(--sb-accent, #E67E22);
+    color: #fff;
+    border: 2px solid #fff;
+    font-size: 14px;
+    font-weight: 700;
+    line-height: 1;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.4);
+  }
+  #chapters-hint-close:hover { filter: brightness(1.1); }
+  @keyframes hint-pop {
+    from { opacity: 0; transform: translateY(-6px) scale(0.96); }
+    to { opacity: 1; transform: translateY(0) scale(1); }
+  }
+
+  #theme-picker {
+    padding: 4px 16px 16px 16px;
+    border-bottom: 1px solid var(--sb-border);
+    margin-bottom: 6px;
+  }
+  #theme-picker .theme-label {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--sb-text);
+    opacity: 0.6;
+    margin-bottom: 8px;
+    display: block;
+  }
+  #theme-picker .swatches {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .swatch {
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    cursor: pointer;
+    border: 2px solid rgba(255,255,255,0.25);
+    transition: transform 0.15s ease, border-color 0.15s ease;
+    position: relative;
+  }
+  .swatch:hover { transform: scale(1.12); }
+  .swatch.active { border-color: var(--sb-text-strong); }
+  .swatch[data-theme="default"] { background: linear-gradient(135deg,#16212c,#E67E22); }
+  .swatch[data-theme="strawberry"] { background: linear-gradient(135deg,#7a1f3d,#ff4d6d); }
+  .swatch[data-theme="candyland"] { background: linear-gradient(135deg,#4b1d6b,#ff2fd0); }
+  .swatch[data-theme="victorian"] { background: linear-gradient(135deg,#2b1d14,#a8763e); }
+  .swatch[data-theme="pencilrot"] { background: linear-gradient(135deg,#3a3a38,#d6d3c9); }
+  .swatch[data-theme="sky"] { background: linear-gradient(135deg,#1f4e8c,#3ea9ff); }
+  .swatch[data-theme="icepolar"] { background: linear-gradient(135deg,#0e2f3d,#5fd8e6); }
+  .swatch[data-theme="appleos"] { background: linear-gradient(135deg,#007aff,#f6f6f8); }
+
+  #chapter-sidebar .chap-btn {
+    display: block;
+    width: 100%;
+    text-align: left;
+    background: none;
+    border: none;
+    color: var(--sb-text);
+    padding: 12px 20px;
+    font-size: 14px;
+    cursor: pointer;
+    border-left: 4px solid transparent;
+    transition: 0.2s;
+  }
+  #chapter-sidebar .chap-btn:hover {
+    background: var(--sb-hover);
+    color: var(--sb-text-strong);
+  }
+  #chapter-sidebar .chap-btn.active {
+    background: var(--sb-active-bg);
+    border-left-color: var(--sb-accent);
+    color: var(--sb-text-strong);
+    font-weight: 600;
+  }
+  #chapter-sidebar .chap-num {
+    display:inline-block;
+    width: 26px;
+    color: var(--sb-accent);
+    font-weight: 700;
+  }
+
+  #viewer-wrap {
+    flex: 1;
+    height: 100vh;
+    position: relative;
+  }
+  #chapter-frame {
+    width: 100%;
+    height: 100%;
+    border: none;
+    display: block;
+    background: #fff;
+  }
+
+  #loading-msg {
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    color: #888;
+    font-family: 'Poppins', sans-serif;
+  }
+
+  @media (max-width: 800px) {
+    body { flex-direction: column; }
+    #chapter-sidebar {
+      width: 100%;
+      min-width: 0;
+      height: auto;
+      max-height: 55vh;
+      transition: margin-left 0s, max-height 0.25s ease;
+    }
+    #chapter-sidebar.collapsed { margin-left: 0; max-height: 0; overflow: hidden; }
+    #viewer-wrap { height: 55vh; flex: 1; }
+    #chapter-sidebar.collapsed ~ #viewer-wrap { height: calc(100vh - 0px); }
+  }
+</style>
+</head>
+<body>
+
+<div id="chapter-sidebar">
+  <div id="sidebar-header">
+    <h1>📚 RAZZ — ALL CHAPTERS</h1>
+    <button id="close-sidebar-btn" title="Hide sidebar"><span class="x-icon">✕</span><span class="x-label">Tap to close side bar</span></button>
+  </div>
+
+  <div id="theme-picker">
+    <span class="theme-label">Theme</span>
+    <div class="swatches">
+      <div class="swatch active" data-theme="default" title="Default (Midnight)"></div>
+      <div class="swatch" data-theme="strawberry" title="Strawberry"></div>
+      <div class="swatch" data-theme="candyland" title="Candy Land"></div>
+      <div class="swatch" data-theme="victorian" title="1800s"></div>
+      <div class="swatch" data-theme="pencilrot" title="Pencil Rot"></div>
+      <div class="swatch" data-theme="sky" title="Sky"></div>
+      <div class="swatch" data-theme="icepolar" title="Ice Polar"></div>
+      <div class="swatch" data-theme="appleos" title="Apple OS Vibes"></div>
+    </div>
+  </div>
+
+  <div id="chap-list"></div>
+</div>
+
+<button id="open-sidebar-btn" title="Show sidebar">☰</button>
+
+<div id="chapters-hint">
+  <button id="chapters-hint-close" title="Close">✕</button>
+  <strong>📚 Chapters are here!</strong>
+  Tap the ☰ button to open the chapter list.
+</div>
+
+<div id="viewer-wrap">
+  <div id="loading-msg">Loading…</div>
+  <iframe id="chapter-frame" style="display:none;"></iframe>
+</div>
+
+<script>
+/* Chapters are now separate files listed in chapters.json, fetched on demand.
+   This means each chapter can be edited independently (e.g. via the /admin CMS)
+   without touching this file. */
+let CHAPTERS = {};      // id -> { title, file }
+const chapterCache = {}; // id -> html string, cached after first fetch
+
+const listEl = document.getElementById('chap-list');
+const frame = document.getElementById('chapter-frame');
+const loadingMsg = document.getElementById('loading-msg');
+const sidebar = document.getElementById('chapter-sidebar');
+const closeBtn = document.getElementById('close-sidebar-btn');
+const openBtn = document.getElementById('open-sidebar-btn');
+
+async function init() {
+  const res = await fetch('chapters.json', { cache: 'no-store' });
+  const manifest = await res.json();
+  manifest.forEach(ch => { CHAPTERS[ch.id] = ch; });
+
+  const ids = Object.keys(CHAPTERS).map(Number).sort((a, b) => a - b);
+
+  ids.forEach(id => {
+    const btn = document.createElement('button');
+    btn.className = 'chap-btn';
+    btn.id = 'btn-' + id;
+    btn.innerHTML = '<span class="chap-num">' + id + '</span>' + CHAPTERS[id].title.replace(/^Ch \d+ – /, '');
+    btn.addEventListener('click', () => loadChapter(id));
+    listEl.appendChild(btn);
+  });
+
+  let start = ids[0];
+  try {
+    const saved = localStorage.getItem('razz_last_chapter');
+    if (saved && CHAPTERS[saved]) start = Number(saved);
+  } catch (e) {}
+  loadChapter(start);
+
+  try {
+    const savedTheme = localStorage.getItem('razz_theme');
+    if (savedTheme) setTheme(savedTheme);
+  } catch (e) {}
+}
+
+async function loadChapter(id) {
+  const entry = CHAPTERS[id];
+  if (!entry) return;
+  document.querySelectorAll('.chap-btn').forEach(b => b.classList.remove('active'));
+  const activeBtn = document.getElementById('btn-' + id);
+  if (activeBtn) activeBtn.classList.add('active');
+
+  loadingMsg.style.display = 'block';
+  frame.style.display = 'none';
+
+  try {
+    if (!chapterCache[id]) {
+      const res = await fetch(entry.file, { cache: 'no-store' });
+      chapterCache[id] = await res.text();
+    }
+    frame.srcdoc = chapterCache[id];
+    try { localStorage.setItem('razz_last_chapter', id); } catch (e) {}
+  } finally {
+    loadingMsg.style.display = 'none';
+    frame.style.display = 'block';
+  }
+}
+
+/* ---------- Sidebar collapse/expand ---------- */
+function setSidebarCollapsed(collapsed) {
+  sidebar.classList.toggle('collapsed', collapsed);
+  openBtn.classList.toggle('visible', collapsed);
+  try { localStorage.setItem('razz_sidebar_collapsed', collapsed ? '1' : '0'); } catch (e) {}
+}
+closeBtn.addEventListener('click', () => setSidebarCollapsed(true));
+openBtn.addEventListener('click', () => setSidebarCollapsed(false));
+
+/* ---------- Theme picker ---------- */
+function setTheme(theme) {
+  if (theme === 'default') {
+    document.documentElement.removeAttribute('data-theme');
+  } else {
+    document.documentElement.setAttribute('data-theme', theme);
+  }
+  document.querySelectorAll('.swatch').forEach(s => {
+    s.classList.toggle('active', s.getAttribute('data-theme') === theme);
+  });
+  try { localStorage.setItem('razz_theme', theme); } catch (e) {}
+}
+document.querySelectorAll('.swatch').forEach(s => {
+  s.addEventListener('click', () => setTheme(s.getAttribute('data-theme')));
+});
+
+/* Sidebar always starts closed on open — must be clicked (☰) to navigate */
+setSidebarCollapsed(true);
+
+/* ---------- First-open "chapters are here" popup ---------- */
+const chaptersHint = document.getElementById('chapters-hint');
+const chaptersHintClose = document.getElementById('chapters-hint-close');
+function hideChaptersHint() { chaptersHint.classList.remove('visible'); }
+chaptersHintClose.addEventListener('click', hideChaptersHint);
+openBtn.addEventListener('click', hideChaptersHint);
+setTimeout(() => { chaptersHint.classList.add('visible'); }, 600);
+
+init();
+</script>
+</body>
+</html>
